@@ -21,7 +21,7 @@ const intro = useRef(null)
 
 
   return (
-    <main className="home-grid">
+    <main className="home-grid  ">
       <div ref={intro}  className="card intro card-hover card-shine-effect ">
         <div className="intro-image">
           <img src="/icons/hero-img.png" alt="" />
@@ -51,15 +51,15 @@ const intro = useRef(null)
           </marquee>
         </div>
 
-        <div as="div" >
+        <div className="more-about" >
           <Link to="/more-about-me" className="card small credentials card-hover card-link-card">
             <div className="signature">
-              <img src="/icons/Group 18.png" alt="" style={{ height: "110px", width: "180px" }} />
+              <img src="/icons/New-folder/my-logo.png " alt="" style={{ height: "110px", width: "180px" }} />
             </div>
             <div className="services-content card-text-band">
               <div>
-                <p className="eyebrow">MORE ABOUT ME</p>
-                <h3>Credentials</h3>
+                <p className="eyebrow lt">MORE ABOUT ME</p>
+                <h3 className="bt">Credentials</h3>
               </div>
               <span className="circle-arrow" aria-hidden="true">
                 <img src="/icons/icon.svg" width="46" height="42" alt="" decoding="async" />
@@ -70,7 +70,7 @@ const intro = useRef(null)
 
         <div as="section" className="card small projects card-hover" >
           <div className="project-thumb">
-            <img src="/icons/Rectangle 1000001790.png" alt="" />
+            <img src="/icons/New-folder/my-work.png" alt="" />
           </div>
           <div className="services-content card-text-band">
             <div>
@@ -105,7 +105,10 @@ const intro = useRef(null)
 
       <div as="section" className="card wide services card-hover" >
         <div className="icons-row">
-          <img src="/icons/Frame 2147226926.png" alt="" />
+          <img src="/icons/New-folder/service 1.svg" alt="" />
+          <img src="/icons/New-folder/service 2.svg" alt="" />
+          <img src="/icons/New-folder/service 3.svg" alt="" />
+          <img src="/icons/New-folder/service 4.svg" alt="" />
         </div>
         <div className="services-content">
           <div>
@@ -126,9 +129,11 @@ const intro = useRef(null)
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="social-dot">Be</span>
+            <span className="social-dot">
+              <img src="/icons/New-folder/behance logo.svg" alt="" />
+            </span>
           </a>
-          <span className="social-dot">in</span>
+          <span className="social-dot"><img src="/icons/New-folder/linkdin logo.svg" alt="" /></span>
         </div>
         <div className="services-content card-text-band">
           <div>
@@ -146,21 +151,21 @@ const intro = useRef(null)
       <div as="section" className="card stats card-hover" 
       >
         <div className="stat">
-          <strong>07</strong>
-          <span>YEARS EXPERIENCE</span>
+          <strong>+3</strong>
+          <span>YEARS <br /> EXPERIENCE</span>
         </div>
         <div className="stat">
           <strong>+125</strong>
-          <span>CLIENTS WORLDWIDE</span>
+          <span>CLIENTS <br /> WORLDWIDE</span>
         </div>
         <div className="stat">
           <strong>+210</strong>
-          <span>TOTAL PROJECTS</span>
+          <span>TOTAL <br /> PROJECTS</span>
         </div>
       </div>
 
-      <div as="section" className="card cta card-hover" >
-        <p className="spark">✦</p>
+      <div as="section" className="card cta card-hover relative" >
+        <div className="spark absolute top-0"><img src="/icons/New-folder/lets work.svg" alt="" /></div>
         <h2>
           Let&apos;s
           <br />

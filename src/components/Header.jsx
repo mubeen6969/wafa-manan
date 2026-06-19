@@ -64,8 +64,9 @@ export default function Header() {
           Contact
         </NavLink>
       </nav>
-      <button className="talk-btn" type="button">
+      <button className="talk-btn relative flex gap-2 items-center" type="button">
         Let's talk
+        <div><img src="/icons/New-folder/button icon.svg" alt="" /></div>
       </button>
     </motion.header>
   );
