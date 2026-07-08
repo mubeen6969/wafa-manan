@@ -11,6 +11,8 @@ import MoreAboutMePage from "./pages/MoreAboutMePage";
 import ProjectViewerPage from "./pages/ProjectViewerPage";
 import ServicesPage from "./pages/ServicesPage";
 import WorksPage from "./pages/WorksPage";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminLogin from "./pages/AdminLogin";
 
 export default function App() {
   useIntroAnimation();
@@ -64,6 +66,22 @@ export default function App() {
         element={
           <Layout>
             <ContactPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <Layout>
+            <AdminDashboard />
+          </Layout>
+        }
+      />
+      <Route
+        path="/admin/login"
+        element={
+          <Layout>
+            <AdminLogin />
           </Layout>
         }
       />

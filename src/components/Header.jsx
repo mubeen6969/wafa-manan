@@ -64,7 +64,7 @@ export default function Header() {
           Contact
         </NavLink>
       </nav>
-      <button className="talk-btn relative flex gap-2 items-center" type="button">
+      <button className="talk-btn relative flex gap-2 items-center whitespace-nowrap" type="button">
         Let's talk
         <div><img src="/icons/New-folder/button icon.svg" alt="" /></div>
       </button>

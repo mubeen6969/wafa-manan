@@ -1,10 +1,37 @@
 
-import { useState } from "react";
-import { categoryLabel, mediaType, projects } from "../utils/projects";
+import { useEffect, useState } from "react";
+// import { categoryLabel, mediaType, projects } from "../utils/projects";
+
+const mediaType = (src) => {
+  if (!src) return "image";
+
+  const extension = src.split(".").pop().toLowerCase();
+
+  return ["mp4", "webm", "ogg"].includes(extension)
+    ? "video"
+    : "image";
+};
+
+const categoryLabel = (category) => {
+  const labels = {
+    "web-design": "Web Design",
+    "app-design": "App Design",
+    "graphic-design": "Graphic Design",
+    "logo-design": "Logo Design",
+  };
+
+  return labels[category] || category;
+};
 
 export default function WorksPage() {
   const [filter, setFilter] = useState("all");
   const [count, setCount] = useState(6);
+  const [projects, setProjects] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/projects")
+      .then((res) => res.json())
+      .then((data) => setProjects(data));
+  }, []);
 
   
 const showCards =
