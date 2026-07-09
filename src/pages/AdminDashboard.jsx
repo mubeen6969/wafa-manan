@@ -37,7 +37,7 @@ export default function AdminDashboard() {
         data.append("image", file);
 
         const response = await fetch(
-            "http://localhost:5000/api/upload",
+            "https://wafa-manan-back-end.onrender.com/api/admin/login",
             {
                 method: "POST",
                 body: data,
@@ -74,7 +74,7 @@ export default function AdminDashboard() {
 
         if (editingId) {
             await fetch(
-                `http://localhost:5000/api/projects/${editingId}`,
+                `https://wafa-manan-back-end.onrender.com/api/admin/login/${editingId}`,
                 {
                     method: "PUT",
                     headers: {
@@ -87,7 +87,7 @@ export default function AdminDashboard() {
             alert("Project Updated");
         } else {
             await fetch(
-                "http://localhost:5000/api/projects",
+                "https://wafa-manan-back-end.onrender.com/api/admin/login",
                 {
                     method: "POST",
                     headers: {
@@ -121,7 +121,8 @@ export default function AdminDashboard() {
         if (!confirmDelete) return;
 
         await fetch(
-            `http://localhost:5000/api/projects/${id}`,
+            // `"https://wafa-manan-back-end.onrender.com/api/admin/login/${id}`,
+            `https://wafa-manan-back-end.onrender.com/api/projects/${id}`,
             {
                 method: "DELETE",
             }
@@ -144,7 +145,8 @@ export default function AdminDashboard() {
     const [projects, setProjects] = useState([]);
     const fetchProjects = async () => {
         const response = await fetch(
-            "http://localhost:5000/api/projects"
+            // "https://wafa-manan-back-end.onrender.com/api/admin/login"
+            "https://wafa-manan-back-end.onrender.com/api/projects"
         );
 
         const data = await response.json();
@@ -164,7 +166,7 @@ export default function AdminDashboard() {
         setUploading(true);
 
         const response = await fetch(
-            "http://localhost:5000/api/upload",
+            "https://wafa-manan-back-end.onrender.com/api/upload",
             {
                 method: "POST",
                 body: data,

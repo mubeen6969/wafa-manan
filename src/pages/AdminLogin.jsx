@@ -20,7 +20,7 @@ export default function AdminLogin() {
     e.preventDefault();
 
     const response = await fetch(
-      "http://localhost:5000/api/admin/login",
+      "https://wafa-manan-back-end.onrender.com/api/admin/login",
       {
         method: "POST",
         headers: {

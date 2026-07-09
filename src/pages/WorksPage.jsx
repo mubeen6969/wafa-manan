@@ -28,7 +28,7 @@ export default function WorksPage() {
   const [count, setCount] = useState(6);
   const [projects, setProjects] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/api/projects")
+    fetch("https://wafa-manan-back-end.onrender.com/api/projects")
       .then((res) => res.json())
       .then((data) => setProjects(data));
   }, []);
