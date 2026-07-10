@@ -101,9 +101,12 @@ export default function AboutPage() {
         </Link>
       </div>
       <div as="section" className="card small credentials card-hover" delay={0.28}>
-        <div className="signature">
+        {/* <div className="signature">
           <img src="/icons/Group 18.png" alt="" style={{ height: "150px", width: "180px" }} />
-        </div>
+        </div> */}
+         <div className="signature">
+              <img src="/icons/New-folder/my-logo.png " alt="" style={{ height: "110px", width: "180px" }} />
+            </div>
         <div className="services-content card-text-band">
           <div>
             <p className="eyebrow">MORE ABOUT ME</p>

@@ -130,10 +130,10 @@ export default function ServicesPage() {
       </ScrollReveal>
 
       <ScrollReveal as="section" className="card small credentials card-hover services-bottom-credentials" delay={0.26}>
-        <div className="services-signature">
-          {/* <span>wafa</span> */}
-           <img src="/icons/Group 18.png" alt="" style={{ height: "110px", width: "180px" }} />
-        </div>
+       
+         <div className="signature">
+              <img src="/icons/New-folder/my-logo.png " alt="" style={{ height: "110px", width: "180px" }} />
+            </div>
         <div className="services-content card-text-band">
           <div>
             <p className="eyebrow">MORE ABOUT ME</p>

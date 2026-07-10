@@ -9,20 +9,20 @@ export default function HomePage() {
   // gsap.registerPlugin(ScrollTrigger)
 
 
-const intro = useRef(null)
+// const intro = useRef(null)
 
-  useGSAP(() => {
-  gsap.fromTo(
-    intro.current,
-    { x: -100, opacity: 0 },
-    { x: 0, opacity: 1, duration: 0.8, delay: 1 }
-  );
-}, []);
+//   useGSAP(() => {
+//   gsap.fromTo(
+//     intro.current,
+//     { x: -100, opacity: 0 },
+//     { x: 0, opacity: 1, duration: 0.8, delay: 1 }
+//   );
+// }, []);
 
 
   return (
     <main className="home-grid  ">
-      <div ref={intro}  className="card intro card-hover card-shine-effect ">
+      <div  className="card intro card-hover card-shine-effect ">
         <div className="intro-image">
           <img src="/icons/hero-img.png" alt="" />
         </div>
