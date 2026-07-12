@@ -1,3 +1,4 @@
+import { label } from "framer-motion/client";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -16,17 +17,19 @@ export default function ProjectViewerPage() {
   }, [title]);
 
   return (
-    <main className="min-h-screen w-[80vw] m-auto! items-center bg-[#0a0c12] text-[#f1f4ff] font-[Inter,Arial,sans-serif] grid grid-rows-[auto_1fr]">
-      <header className="mt-[50px]! w-[80vw]    py-[14px] px-[18px] border-b border-[#1c2234]  bg-[rgba(10,12,18,0.94)] backdrop-blur-xs">
-        <h1 className="text-[28px] tracking-[-0.3px] ml-[30vw]!">{title}</h1>
-        <a
+    <main className="min-h-screen w-[70vw] m-auto! items-center  text-[#f1f4ff] 
+    ">
+      <header className="mt-[80px]! w-full ">
+        <h4 className="uppercase text-center text-[#BCBCBC]" >Web design</h4>
+        <h1 className="text-[28px] bold capitalize mb-[50px]! text-center italic">{title}</h1>
+        {/* <a
           className="no-underline text-white border border-[#384362] rounded-[10px] py-2 px-3 text-[13px]"
           href={src || "#"}
           target="_blank"
           rel="noopener"
         >
           Open Direct File
-        </a>
+        </a> */}
       </header>
       <section className="grid place-items-center p-[14px]">
         {!src ? (

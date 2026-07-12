@@ -1,7 +1,7 @@
 import { Mail, Phone, MessageCircle } from "lucide-react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { useState } from "react";
-
+import { FaWhatsapp } from "react-icons/fa6";
 export default function ContactPage() {
   const [success, setSuccess] = useState(false);
   return (
@@ -27,6 +27,7 @@ export default function ContactPage() {
             <div>
               <p className="contact-info-label">CONTACT US</p>
               <a className="contact-info-value" href="tel:+923227780622">
+                
                 +92 322 7780622
               </a>
             </div>
@@ -42,7 +43,7 @@ export default function ContactPage() {
             in
           </a>
           <a href="https://wa.me/923227780622" target="_blank" rel="noopener noreferrer" className="contact-social-dot" aria-label="WhatsApp">
-            <MessageCircle size={22} />
+           <FaWhatsapp />
           </a>
         </div>
       </ScrollReveal>
