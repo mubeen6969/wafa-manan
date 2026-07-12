@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { i } from "framer-motion/client";
 
@@ -47,6 +47,7 @@ const SERVICE_CARDS = [
 ];
 
 export default function ServicesPage() {
+   const navigate = useNavigate()
   return (
     <main className="grid-about services-page">
       <ScrollReveal as="header" className="services-heading">
@@ -91,7 +92,8 @@ export default function ServicesPage() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal as="section" className="card square profiles card-hover services-bottom-profiles" delay={0.18}>
+      <ScrollReveal as="section" className="card square profiles card-hover services-bottom-profiles" delay={0.18}
+       onClick={() => navigate("/contact")}>
         <div className="social-icons">
           <a href="https://www.behance.net/wafa29" target="_blank" rel="noopener noreferrer" className="social-dot" aria-label="Behance">
             Be
@@ -115,7 +117,8 @@ export default function ServicesPage() {
 
       
 
-      <ScrollReveal as="section" className="card card-hover services-bottom-cta cta" delay={0.22}>
+      <ScrollReveal as="section" className="card card-hover services-bottom-cta cta" delay={0.22}
+       onClick={() => navigate("/contact")}>
         <p className="spark">✦</p>
         <h2 className="services-cta-headline">
           Let&apos;s
@@ -129,7 +132,8 @@ export default function ServicesPage() {
           </Link>
       </ScrollReveal>
 
-      <ScrollReveal as="section" className="card small credentials card-hover services-bottom-credentials" delay={0.26}>
+      <ScrollReveal as="section" className="card small credentials card-hover services-bottom-credentials" delay={0.26}
+      onClick={()=>navigate("/more-about-me")}>
        
          <div className="signature">
               <img src="/icons/New-folder/my-logo.png " alt="" style={{ height: "110px", width: "180px" }} />

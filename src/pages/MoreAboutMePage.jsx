@@ -8,7 +8,7 @@ export default function MoreAboutMePage() {
           <img src="/icons/hero-img.png" alt="Wafa Manan" width="320" height="320" decoding="async" />
         </div>
         <h1 className="about-me-name">Wafa Manan</h1>
-        <p className="about-me-role">@ux.uidesigner</p>
+        <p className="about-me-role">@ux.ui Designer</p>
         <div className="about-me-socials">
           <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="about-me-social-dot" aria-label="Behance">
             bē

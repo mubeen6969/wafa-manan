@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 // import ScrollTrigger from "gsap-trial/ScrollTrigger";
 // import { ScrollReveal } from "../components/ScrollReveal";
@@ -9,20 +9,21 @@ export default function HomePage() {
   // gsap.registerPlugin(ScrollTrigger)
 
 
-// const intro = useRef(null)
+  // const intro = useRef(null)
 
-//   useGSAP(() => {
-//   gsap.fromTo(
-//     intro.current,
-//     { x: -100, opacity: 0 },
-//     { x: 0, opacity: 1, duration: 0.8, delay: 1 }
-//   );
-// }, []);
+  //   useGSAP(() => {
+  //   gsap.fromTo(
+  //     intro.current,
+  //     { x: -100, opacity: 0 },
+  //     { x: 0, opacity: 1, duration: 0.8, delay: 1 }
+  //   );
+  // }, []);
 
-
+  const navigate = useNavigate()
   return (
     <main className="home-grid  ">
-      <div  className="card intro card-hover card-shine-effect ">
+      <div className="card intro card-hover card-shine-effect "
+        onClick={() => navigate("/about")}>
         <div className="intro-image">
           <img src="/icons/hero-img.png" alt="" />
         </div>
@@ -36,11 +37,9 @@ export default function HomePage() {
             I&apos;m a Senior UI/UX <br /> Designer with 3 years of <br /> expertise.
           </p>
         </div>
-        <Link to="/about">
-          <button type="button" className="circle-arrow intro-btn" aria-label="Read more">
-            <img src="/icons/icon.svg" width="46" height="42" alt="" decoding="async" />
-          </button>
-        </Link>
+        <button type="button" className="circle-arrow intro-btn" aria-label="Read more">
+          <img src="/icons/icon.svg" width="46" height="42" alt="" decoding="async" />
+        </button>
       </div>
 
       <div as="section" className="latest-work" >
@@ -51,7 +50,8 @@ export default function HomePage() {
           </marquee>
         </div>
 
-        <div className="more-about" >
+        <div className="more-about" 
+        onClick={()=>navigate("/more-about-me")}>
           <Link to="/more-about-me" className="card small credentials card-hover card-link-card">
             <div className="signature">
               <img src="/icons/New-folder/my-logo.png " alt="" style={{ height: "110px", width: "180px" }} />
@@ -68,7 +68,8 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div as="section" className="card small projects card-hover" >
+        <div as="section" className="card small projects card-hover"
+          onClick={() => navigate("/works")} >
           <div className="project-thumb">
             <img src="/icons/New-folder/my-work.png" alt="" />
           </div>
@@ -86,24 +87,29 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div as="section" className="card square gfonts card-hover" >
+      <div as="section" className="card square gfonts card-hover"
+        onClick={() =>
+          window.open(
+            "/images/wafa-resume.pdf",
+            "_blank"
+          )
+        }>
         <div className="gfonts">
           <img src="/icons/gfonts.png.png" alt="" />
         </div>
         <div className="services-content">
           <div>
-            <p className="eyebrow">CV</p>
-            <h3>Resume</h3>
+              <p className="eyebrow">CV</p>
+              <h3>Resume</h3>
           </div>
-          <a href="/images/wafa-resume.pdf" target="_blank" rel="noopener noreferrer">
-            <button type="button" className="circle-arrow" aria-label="Resume">
-              <img src="/icons/icon.svg" width="46" height="42" alt="" decoding="async" />
-            </button>
-          </a>
+          <button type="button" className="circle-arrow" aria-label="Resume">
+            <img src="/icons/icon.svg" width="46" height="42" alt="" decoding="async" />
+          </button>
         </div>
       </div>
 
-      <div as="section" className="card wide services card-hover" >
+      <div as="section" className="card wide services card-hover"
+        onClick={() => navigate("/services")}>
         <div className="icons-row">
           <img src="/icons/New-folder/service 1.svg" alt="" />
           <img src="/icons/New-folder/service 2.svg" alt="" />
@@ -135,7 +141,8 @@ export default function HomePage() {
           </a>
           <span className="social-dot"><img src="/icons/New-folder/linkdin logo.svg" alt="" /></span>
         </div>
-        <div className="services-content card-text-band">
+        <div className="services-content card-text-band"
+          onClick={() => navigate("/contact")}>
           <div>
             <p className="eyebrow">STAY WITH ME</p>
             <h3>Profiles</h3>
@@ -148,7 +155,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div as="section" className="card stats card-hover" 
+      <div as="section" className="card stats card-hover"
       >
         <div className="stat">
           <strong>+3</strong>
@@ -164,7 +171,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div as="section" className="card cta card-hover relative" >
+      <div as="section" className="card cta card-hover relative"
+        onClick={() => navigate("/contact")} >
         <div className="spark absolute top-0"><img src="/icons/New-folder/lets work.svg" alt="" /></div>
         <h2>
           Let&apos;s

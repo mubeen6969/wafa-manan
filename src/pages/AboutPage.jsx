@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ScrollReveal } from "../components/ScrollReveal";
 
 export default function AboutPage() {
+   const navigate = useNavigate()
   return (
     <main className="grid-about about-grid">
       <div as="section" className="card card-hover about-photo">
@@ -66,7 +67,8 @@ export default function AboutPage() {
           </li>
         </ul>
       </div>
-      <div as="section" className="card square profiles card-hover" delay={0.2}>
+      <div as="section" className="card square profiles card-hover" delay={0.2}
+       onClick={() => navigate("/contact")}>
         <div className="social-icons">
           <a href="https://www.behance.net/wafa29" target="_blank" rel="noopener noreferrer" className="social-dot" aria-label="Behance">
             Be
@@ -88,7 +90,8 @@ export default function AboutPage() {
 
         </div>
       </div>
-      <div as="section" className="card card-hover about-cta cta" delay={0.24}>
+      <div as="section" className="card card-hover about-cta cta" delay={0.24}
+       onClick={() => navigate("/contact")}>
         <p className="spark">✦</p>
         <h2 className="about-cta-headline">
           Let&apos;s&nbsp;<br />
@@ -100,7 +103,8 @@ export default function AboutPage() {
           </button>
         </Link>
       </div>
-      <div as="section" className="card small credentials card-hover" delay={0.28}>
+      <div as="section" className="card small credentials card-hover" delay={0.28}
+      onClick={()=>navigate("/more-about-me")}>
         {/* <div className="signature">
           <img src="/icons/Group 18.png" alt="" style={{ height: "150px", width: "180px" }} />
         </div> */}
