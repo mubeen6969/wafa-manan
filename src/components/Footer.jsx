@@ -1,10 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const TIGHT_PATHS = new Set(["/services", "/contact", "/works"]);
 
 export default function Footer() {
   const location = useLocation();
+  const navigate = useNavigate()
   return (
     <motion.footer
       className={`footer ${TIGHT_PATHS.has(location.pathname) ? "footer-tight" : ""}`}
@@ -21,7 +22,8 @@ export default function Footer() {
         <Link to="/contact">CONTACT</Link>
       </div>
       <p>
-        &copy; All rights reserved by <span>MW.</span>
+        &copy; All rights reserved by <span
+        onClick={()=>navigate("/admin")}>MW.</span>
       </p>
     </motion.footer>
   );

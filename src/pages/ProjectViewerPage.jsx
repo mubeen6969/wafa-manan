@@ -17,8 +17,8 @@ export default function ProjectViewerPage() {
 
   return (
     <main className="min-h-screen w-[80vw] m-auto! items-center bg-[#0a0c12] text-[#f1f4ff] font-[Inter,Arial,sans-serif] grid grid-rows-[auto_1fr]">
-      <header className="flex justify-between items-center gap-3 py-[14px] px-[18px] border-b border-[#1c2234] sticky top-0 bg-[rgba(10,12,18,0.94)] backdrop-blur-xs">
-        <h1 className="text-[18px] tracking-[-0.3px]">{title}</h1>
+      <header className="mt-[50px]! w-[80vw]    py-[14px] px-[18px] border-b border-[#1c2234]  bg-[rgba(10,12,18,0.94)] backdrop-blur-xs">
+        <h1 className="text-[28px] tracking-[-0.3px] ml-[30vw]!">{title}</h1>
         <a
           className="no-underline text-white border border-[#384362] rounded-[10px] py-2 px-3 text-[13px]"
           href={src || "#"}

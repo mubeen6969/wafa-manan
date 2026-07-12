@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { ScrollReveal } from "../components/ScrollReveal";
-
+import { FaWhatsapp } from "react-icons/fa6";
 export default function MoreAboutMePage() {
+  const navigate = useNavigate()
   return (
     <main className="about-me-page">
       <ScrollReveal as="aside" className="card about-me-profile">
@@ -17,10 +19,12 @@ export default function MoreAboutMePage() {
             in
           </a>
           <a href="https://wa.me/923227780622" target="_blank" rel="noopener noreferrer" className="about-me-social-dot" aria-label="WhatsApp">
-            wa
+          <FaWhatsapp />
+            
           </a>
         </div>
-        <button type="button" className="about-me-contact-btn">
+        <button type="button" className="about-me-contact-btn"
+        onClick={()=>navigate("/contact")}>
           Contact Me
         </button>
       </ScrollReveal>

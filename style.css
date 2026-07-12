@@ -47,6 +47,12 @@
     background: #D82E82;
 }
 
+button{
+    transition: transform 0.2 ease;
+}
+button:active{
+    transform: scale(1.1);
+}
 
 
 body {

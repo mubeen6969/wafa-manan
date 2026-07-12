@@ -30,8 +30,8 @@ const SERVICE_CARDS = [
     body: "I design intuitive, user-focused digital experiences in Figma, Framer, and Adobe XD that combine clarity, functionality, and modern aesthetics. My focus is on creating seamless interfaces that deliver meaningful user journeys across web and mobile platforms.",
   },
   {
-    title: "WEB DESIGN",
-    subtitle: "(FRAMER & WORDPRESS)",
+    title: "FRAMER WEB DESIGN",
+    subtitle: "",
     body: "My focus is on creating clean, user-friendly layouts with strong visual structure and smooth user experience. I can turn UI designs into fully published websites using Framer and also work with WordPress for flexible website builds and content management.",
   },
   {

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate()
 
   useEffect(() => {
     setIsOpen(false);
@@ -64,7 +65,8 @@ export default function Header() {
           Contact
         </NavLink>
       </nav>
-      <button className="talk-btn relative flex gap-2 items-center whitespace-nowrap" type="button">
+      <button className="talk-btn relative flex gap-2 items-center whitespace-nowrap" type="button"
+      onClick={()=>navigate("/contact")}>
         Let's talk
         <div><img src="/icons/New-folder/button icon.svg" alt="" /></div>
       </button>

@@ -29,25 +29,46 @@ export default function AdminDashboard() {
         });
     };
 
-    const uploadFile = async (file) => {
-        if (!file) return null;
+    // const uploadFile = async (file) => {
+    //     if (!file) return null;
 
-        const data = new FormData();
+    //     const data = new FormData();
 
-        data.append("image", file);
+    //     data.append("image", file);
 
-        const response = await fetch(
-            "https://wafa-manan-back-end.onrender.com/api/admin/login",
-            {
-                method: "POST",
-                body: data,
-            }
-        );
+    //     const response = await fetch(
+    //         "https://wafa-manan-back-end.onrender.com/api/admin/login",
+    //         {
+    //             method: "POST",
+    //             body: data,
+    //         }
+    //     );
 
-        const result = await response.json();
+    //     const result = await response.json();
 
-        return result.imageUrl;
-    };
+    //     return result.imageUrl;
+    // };
+const uploadFile = async (file) => {
+    if (!file) return null;
+
+    const data = new FormData();
+
+    data.append("image", file);
+
+    const response = await fetch(
+        "https://wafa-manan-back-end.onrender.com/api/upload",
+        {
+            method: "POST",
+            body: data,
+        }
+    );
+
+    const result = await response.json();
+
+    return result.imageUrl;
+};
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -71,10 +92,10 @@ export default function AdminDashboard() {
             media: mediaUrl,
             thumb: thumbUrl,
         };
-
+        console.log("PROJECT DATA:", projectData);
         if (editingId) {
             await fetch(
-                `https://wafa-manan-back-end.onrender.com/api/admin/login/${editingId}`,
+                `https://wafa-manan-back-end.onrender.com/api/projects/${editingId}`,
                 {
                     method: "PUT",
                     headers: {
@@ -85,9 +106,11 @@ export default function AdminDashboard() {
             );
 
             alert("Project Updated");
+
         } else {
             await fetch(
-                "https://wafa-manan-back-end.onrender.com/api/admin/login",
+                // "https://wafa-manan-back-end.onrender.com/api/admin/login",
+                "https://wafa-manan-back-end.onrender.com/api/projects",
                 {
                     method: "POST",
                     headers: {
@@ -214,30 +237,30 @@ export default function AdminDashboard() {
                     className="border p-3 w-full"
                 />
 
-             
 
-             <div className="flex flex-col">
-                   <label>Thumbnail</label>
 
-                <input 
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) =>
-                        setThumbFile(e.target.files[0])
-                    }
-                    className="border text-gray-400 mb-2.5"
-                />
-                <label>Media</label>
+                <div className="flex flex-col">
+                    <label>Thumbnail</label>
 
-                <input
-                    type="file"
-                    accept="image/*,video/*"
-                    onChange={(e) =>
-                        setMediaFile(e.target.files[0])
-                    }
-                    className="border text-gray-400 mb-2.5"
-                />
-             </div>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                            setThumbFile(e.target.files[0])
+                        }
+                        className="border text-gray-400 mb-2.5"
+                    />
+                    <label>Media</label>
+
+                    <input
+                        type="file"
+                        accept="image/*,video/*"
+                        onChange={(e) =>
+                            setMediaFile(e.target.files[0])
+                        }
+                        className="border text-gray-400 mb-2.5"
+                    />
+                </div>
 
                 <input
                     type="number"
