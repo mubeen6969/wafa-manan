@@ -47,10 +47,11 @@
     background: #D82E82;
 }
 
-button{
+button {
     transition: transform 0.2 ease;
 }
-button:active{
+
+button:active {
     transform: scale(1.1);
 }
 
@@ -66,7 +67,8 @@ body {
     background-attachment: fixed;
     color: #f2f3f7;
 }
-::selection{
+
+::selection {
     background: #D82E82;
 }
 
@@ -366,6 +368,23 @@ body.intro-lock {
     position: relative;
 }
 
+@media (max-width: 776px) {
+    .intro {
+        grid-template-columns: 1fr;
+        /* height: auto; */
+    }
+
+    .intro-image {
+        height: auto !important;
+        width: auto !important;
+    }
+
+    .intro-text {
+        text-align: -webkit-center;
+        margin-top: 20px;
+    }
+}
+
 .intro-text {
     position: relative;
     min-height: 170px;
@@ -436,13 +455,29 @@ body.intro-lock {
 .latest-work {
     display: grid;
     grid-column: span 6;
-    gap: 20px;
+    /* gap: 20px; */
     grid-template-columns: repeat(6, 1fr);
+}
+
+
+@media (min-width: 992px) {
+    .latest-work {
+        gap: 20px;
+    }
+
 }
 
 @media (max-width: 991px) {
     .latest-work {
         grid-column: span 12;
+    }
+
+    .card-link-card {
+        margin: 20px 20px 0 0;
+    }
+
+    .projects {
+        margin: 20px 0 0 0;
     }
 
     .card.profiles {
@@ -457,6 +492,14 @@ body.intro-lock {
 
     .card.profiles {
         grid-column: span 12;
+    }
+
+    .more-about {
+        grid-column: span 6 !important;
+    }
+
+    .card-link-card {
+        margin: 20px 0 0 0 !important;
     }
 }
 
@@ -474,7 +517,7 @@ body.intro-lock {
 
 .small {
     height: 244px;
-    grid-column: span 3 !important;
+    grid-column: span 3;
 }
 
 .credentials .signature {
@@ -727,7 +770,7 @@ body.intro-lock {
 }
 
 .about-summary-title {
-    font-size: 70px;
+    font-size: 6vw;
     font-weight: 600;
     /* letter-spacing: 0.1em; */
     text-align: center;
@@ -779,7 +822,7 @@ body.intro-lock {
 }
 
 .uiux {
-    height: 280px;
+    height: auto;
 }
 
 .about-bio-spark {
@@ -802,7 +845,12 @@ body.intro-lock {
     font-weight: 600;
     letter-spacing: -0.4px;
     color: #f2f3f7;
-    margin: 87px 0 16px;
+    margin: 67px 0 16px;
+}
+@media (max-width: 767px){
+    .about-bio-name {
+        margin: 50px 0 10px 0 ;
+    }
 }
 
 .about-bio-text {
@@ -810,6 +858,7 @@ body.intro-lock {
     line-height: 1.65;
     max-width: 62ch;
     font-size: 15px;
+    margin-bottom: 20px;
 }
 
 .about-exp,
@@ -841,7 +890,7 @@ body.intro-lock {
 
 .about-list-meta {
     font-size: 13px;
-   color: #BCBCBC;
+    color: #BCBCBC;
 }
 
 .about-list-strong {
@@ -976,7 +1025,7 @@ body.intro-lock {
     margin-top: 12px;
     font-size: 15px;
     line-height: 1.65;
-   color: #BCBCBC;
+    color: #BCBCBC;
 }
 
 .services-page .services-bottom-profiles {
@@ -1157,7 +1206,7 @@ body.intro-lock {
 
 .contact-input::placeholder,
 .contact-textarea::placeholder {
-   color: #BCBCBC;
+    color: #BCBCBC;
 }
 
 .contact-textarea {
@@ -1215,6 +1264,12 @@ body.intro-lock {
     height: 240px;
     object-fit: cover;
     display: block;
+}
+@media (max-width:995px){
+.about-me-photo-wrap img{
+    width: auto;
+    height: auto;
+}
 }
 
 .about-me-name {
@@ -1567,9 +1622,13 @@ body.intro-lock {
         grid-column: span 12;
     }
 
+    .more-about {
+        grid-column: span 3;
+    }
+
     .small,
     .square {
-        grid-column: span 6;
+        grid-column: span 5;
     }
 
     .intro-text h2 {

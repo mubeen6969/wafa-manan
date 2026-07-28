@@ -21,7 +21,7 @@ export default function ProjectViewerPage() {
     ">
       <header className="mt-[80px]! w-full ">
         <h4 className="uppercase text-center text-[#BCBCBC]" >Web design</h4>
-        <h1 className="text-[28px] bold capitalize mb-[50px]! text-center italic">{title}</h1>
+        <h1 className="text-[28px] font-bold capitalize mb-[50px]! text-center italic">{title}</h1>
         {/* <a
           className="no-underline text-white border border-[#384362] rounded-[10px] py-2 px-3 text-[13px]"
           href={src || "#"}

@@ -48,25 +48,25 @@ export default function AdminDashboard() {
 
     //     return result.imageUrl;
     // };
-const uploadFile = async (file) => {
-    if (!file) return null;
+    const uploadFile = async (file) => {
+        if (!file) return null;
 
-    const data = new FormData();
+        const data = new FormData();
 
-    data.append("image", file);
+        data.append("image", file);
 
-    const response = await fetch(
-        "https://wafa-manan-back-end.onrender.com/api/upload",
-        {
-            method: "POST",
-            body: data,
-        }
-    );
+        const response = await fetch(
+            "https://wafa-manan-back-end.onrender.com/api/upload",
+            {
+                method: "POST",
+                body: data,
+            }
+        );
 
-    const result = await response.json();
+        const result = await response.json();
 
-    return result.imageUrl;
-};
+        return result.imageUrl;
+    };
 
 
     const handleSubmit = async (e) => {

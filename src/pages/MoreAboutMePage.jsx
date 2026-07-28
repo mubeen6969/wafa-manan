@@ -15,7 +15,7 @@ export default function MoreAboutMePage() {
           <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="about-me-social-dot" aria-label="Behance">
             bē
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="about-me-social-dot" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/wafa-manan-7b03b5326?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="about-me-social-dot" aria-label="LinkedIn">
             in
           </a>
           <a href="https://wa.me/923227780622" target="_blank" rel="noopener noreferrer" className="about-me-social-dot" aria-label="WhatsApp">

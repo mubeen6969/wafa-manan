@@ -73,7 +73,7 @@ export default function AboutPage() {
           <a href="https://www.behance.net/wafa29" target="_blank" rel="noopener noreferrer" className="social-dot" aria-label="Behance">
             Be
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-dot" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/wafa-manan-7b03b5326?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="social-dot" aria-label="LinkedIn">
             in
           </a>
         </div>

@@ -50,7 +50,8 @@ export default function HomePage() {
           </marquee>
         </div>
 
-        <div className="more-about" 
+       
+         <div className="more-about" 
         onClick={()=>navigate("/more-about-me")}>
           <Link to="/more-about-me" className="card small credentials card-hover card-link-card">
             <div className="signature">
@@ -85,7 +86,10 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </div>
+       </div>
+      
+
+
 
       <div as="section" className="card square gfonts card-hover"
         onClick={() =>
@@ -139,7 +143,12 @@ export default function HomePage() {
               <img src="/icons/New-folder/behance logo.svg" alt="" />
             </span>
           </a>
+           <a href="https://www.linkedin.com/in/wafa-manan-7b03b5326?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
           <span className="social-dot"><img src="/icons/New-folder/linkdin logo.svg" alt="" /></span>
+          </a>
         </div>
         <div className="services-content card-text-band"
           onClick={() => navigate("/contact")}>

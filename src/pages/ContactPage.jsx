@@ -39,7 +39,7 @@ export default function ContactPage() {
           <a href="https://www.behance.net/wafa29" target="_blank" rel="noopener noreferrer" className="contact-social-dot" aria-label="Behance">
             Bē
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-social-dot" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/wafa-manan-7b03b5326?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="contact-social-dot" aria-label="LinkedIn">
             in
           </a>
           <a href="https://wa.me/923227780622" target="_blank" rel="noopener noreferrer" className="contact-social-dot" aria-label="WhatsApp">
