@@ -1,8 +1,6 @@
-// import { useGSAP } from "@gsap/react";
-// import gsap from "gsap";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import { useIntroAnimation } from "./hooks/useIntroAnimation";
+import SiteLoader from "./components/SiteLoader";
 import { usePageMeta } from "./hooks/usePageMeta";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
@@ -15,11 +13,12 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogin from "./pages/AdminLogin";
 
 export default function App() {
-  useIntroAnimation();
   usePageMeta();
 
   return (
-    <Routes>
+    <>
+      <SiteLoader />
+      <Routes>
       <Route path="/project-viewer" element={<ProjectViewerPage />} />
       <Route
         path="/"
@@ -86,6 +85,7 @@ export default function App() {
         }
       />
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+      </Routes>
+    </>
   );
 }

@@ -1,12 +1,16 @@
-import { Mail, Phone, MessageCircle } from "lucide-react";
-import { ScrollReveal } from "../components/ScrollReveal";
+import { Mail, Phone, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
+import { Reveal } from "../components/Reveal";
+import { useToast } from "../components/Toast";
+
 export default function ContactPage() {
-  const [success, setSuccess] = useState(false);
+  const toast = useToast();
+  const [sending, setSending] = useState(false);
+
   return (
     <main className="contact-page">
-      <ScrollReveal as="aside" className="contact-info-column">
+      <Reveal as="aside" className="contact-info-column">
         <h2 className="contact-side-title">CONTACT INFO</h2>
         <div className="contact-info-list">
           <article className="contact-info-item">
@@ -27,7 +31,7 @@ export default function ContactPage() {
             <div>
               <p className="contact-info-label">CONTACT US</p>
               <a className="contact-info-value" href="tel:+923227780622">
-                
+
                 +92 322 7780622
               </a>
             </div>
@@ -46,12 +50,11 @@ export default function ContactPage() {
            <FaWhatsapp />
           </a>
         </div>
-      </ScrollReveal>
+      </Reveal>
 
 
-      
 
-<ScrollReveal as="section" className="card contact-form-card" delay={0.1}>
+<Reveal as="section" className="card contact-form-card" delay={0.12}>
   <p className="contact-spark" aria-hidden="true">
     ✧
   </p>
@@ -64,6 +67,7 @@ export default function ContactPage() {
   className="contact-form"
   onSubmit={async (event) => {
     event.preventDefault();
+    setSending(true);
 
     const formData = new FormData(event.target);
 
@@ -85,17 +89,15 @@ export default function ContactPage() {
       const result = await res.json();
 
       if (result.success) {
-        setSuccess(true);
+        toast.success("Message sent! I'll get back to you soon.");
         event.target.reset();
-
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3000);
       } else {
-        alert("Message failed. Try again.");
+        toast.error("Message failed. Please try again.");
       }
     } catch (error) {
-      alert("Something went wrong!");
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setSending(false);
     }
   }}
 >
@@ -136,16 +138,18 @@ export default function ContactPage() {
       required
     />
 
-    <button type="submit" className="contact-submit">
-      Send Message
+    <button type="submit" className="contact-submit admin-submit" disabled={sending}>
+      {sending ? (
+        <>
+          <Loader2 size={18} className="animate-spin" />
+          Sending&hellip;
+        </>
+      ) : (
+        "Send Message"
+      )}
     </button>
-    {success && (
-  <p className="text-green-400 mt-4 text-center">
-    Message sent successfully!
-  </p>
-)}
   </form>
-</ScrollReveal>
+</Reveal>
 
 
 

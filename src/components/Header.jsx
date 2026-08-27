@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import Image from "./Image";
+import { onSiteReady } from "../utils/siteReady";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate()
+  const headerRef = useRef(null);
 
   useEffect(() => {
     setIsOpen(false);
@@ -26,15 +30,31 @@ export default function Header() {
     };
   }, []);
 
+  useGSAP(
+    () => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) return undefined;
+
+      gsap.set(headerRef.current, { opacity: 0, y: -18 });
+
+      const stopWaiting = onSiteReady(() => {
+        gsap.to(headerRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" });
+        gsap.fromTo(
+          headerRef.current.querySelectorAll(".nav-link"),
+          { opacity: 0, y: -8 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.06, delay: 0.15 }
+        );
+      });
+
+      return () => stopWaiting();
+    },
+    { scope: headerRef }
+  );
+
   return (
-    <motion.header
-      className={`topbar ${isOpen ? "menu-open" : ""}`}
-      initial={{ opacity: 0, y: -18 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <header ref={headerRef} className={`topbar ${isOpen ? "menu-open" : ""}`}>
       <Link className="logo" to="/" aria-label="Home">
-        <img src="/icons/Group 15.png" alt="WAFA logo" />
+        <Image src="/icons/Group 15.png" alt="WAFA logo" priority />
       </Link>
       <button
         className="nav-toggle"
@@ -68,8 +88,8 @@ export default function Header() {
       <button className="talk-btn relative flex gap-2 items-center whitespace-nowrap" type="button"
       onClick={()=>navigate("/contact")}>
         Let's talk
-        <div><img src="/icons/New-folder/button icon.svg" alt="" /></div>
+        <div><Image src="/icons/New-folder/button icon.svg" alt="" /></div>
       </button>
-    </motion.header>
+    </header>
   );
 }
