@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../components/Image";
 import { Reveal } from "../components/Reveal";
@@ -7,30 +7,31 @@ import { CountUp } from "../components/CountUp";
 export default function HomePage() {
 
 
+
   const navigate = useNavigate();
 
   const introVideoRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     const video = introVideoRef.current;
 
     if (!video) return;
 
-    // Unmuted video
-    video.muted = false;
+    // Website open hote hi muted video play
+    video.muted = true;
 
-    // Autoplay try
     video.play().catch((error) => {
-      console.log("Browser ne autoplay block ki:", error);
+      console.log("Video autoplay failed:", error);
     });
 
-    // Video end hone ke 1 second baad replay
+    // Video khatam hone ke 1 second baad replay
     const handleEnded = () => {
       setTimeout(() => {
         video.currentTime = 0;
 
         video.play().catch((error) => {
-          console.log("Replay failed:", error);
+          console.log("Video replay failed:", error);
         });
       }, 1000);
     };
@@ -42,12 +43,17 @@ export default function HomePage() {
     };
   }, []);
 
-  const playIntroVideo = () => {
+  const toggleMute = () => {
     const video = introVideoRef.current;
 
     if (!video) return;
 
-    video.muted = false;
+    video.muted = !video.muted;
+    setIsMuted(video.muted);
+
+    // Agar sound on kiya hai aur video paused hai to play karo
+    if (!video.paused) return;
+
     video.play().catch(() => { });
   };
   return (
@@ -58,10 +64,7 @@ export default function HomePage() {
         onClick={() => navigate("/about")}
       >
 
-        <div
-          className="intro-image"
-          onClick={playIntroVideo}
-        >
+        <div className="intro-image">
           <video
             ref={introVideoRef}
             src="/assets/intro-vedio.mp4"
@@ -70,6 +73,16 @@ export default function HomePage() {
             playsInline
             preload="auto"
           />
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMute();
+            }}
+            className="absolute bottom-4 left-4 z-10 rounded-full bg-black/60 px-4 py-2 text-white"
+          >
+            {isMuted ? "🔇" : "🔊"}
+          </button>
         </div>
 
         <div className="intro-text">
