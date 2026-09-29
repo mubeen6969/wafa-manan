@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../components/Image";
 import { Reveal } from "../components/Reveal";
@@ -24,40 +24,88 @@ export default function HomePage() {
   //   video.currentTime = 0;
   // };
 
-// jsx
-const navigate = useNavigate();
+  // jsx
+  // const navigate = useNavigate();
 
-const introVideoRef = useRef(null);
+  // const introVideoRef = useRef(null);
 
-useEffect(() => {
-  const video = introVideoRef.current;
+  // useEffect(() => {
+  //   const video = introVideoRef.current;
 
-  if (!video) return;
+  //   if (!video) return;
 
-  // Video ko automatically play karo
-  video.play().catch((error) => {
-    console.log("Video autoplay failed:", error);
-  });
+  //   // Video ko automatically play karo
+  //   video.play().catch((error) => {
+  //     console.log("Video autoplay failed:", error);
+  //   });
 
-  // Video khatam hone ke baad 1 second wait karke dobara play karo
-  const handleEnded = () => {
-    setTimeout(() => {
-      video.currentTime = 0;
+  //   // Video khatam hone ke baad 1 second wait karke dobara play karo
+  //   const handleEnded = () => {
+  //     setTimeout(() => {
+  //       video.currentTime = 0;
 
-      video.play().catch((error) => {
-        console.log("Video replay failed:", error);
-      });
-    }, 1000);
+  //       video.play().catch((error) => {
+  //         console.log("Video replay failed:", error);
+  //       });
+  //     }, 1000);
+  //   };
+
+  //   video.addEventListener("ended", handleEnded);
+
+  //   return () => {
+  //     video.removeEventListener("ended", handleEnded);
+  //   };
+  // }, []);
+
+
+  const navigate = useNavigate();
+
+  const introVideoRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    const video = introVideoRef.current;
+
+    if (!video) return;
+
+    // Website open hote hi muted video play
+    video.muted = true;
+
+    video.play().catch((error) => {
+      console.log("Video autoplay failed:", error);
+    });
+
+    // Video khatam hone ke 1 second baad replay
+    const handleEnded = () => {
+      setTimeout(() => {
+        video.currentTime = 0;
+
+        video.play().catch((error) => {
+          console.log("Video replay failed:", error);
+        });
+      }, 1000);
+    };
+
+    video.addEventListener("ended", handleEnded);
+
+    return () => {
+      video.removeEventListener("ended", handleEnded);
+    };
+  }, []);
+
+  const toggleMute = () => {
+    const video = introVideoRef.current;
+
+    if (!video) return;
+
+    video.muted = !video.muted;
+    setIsMuted(video.muted);
+
+    // Agar sound on kiya hai aur video paused hai to play karo
+    if (!video.paused) return;
+
+    video.play().catch(() => { });
   };
-
-  video.addEventListener("ended", handleEnded);
-
-  return () => {
-    video.removeEventListener("ended", handleEnded);
-  };
-}, []);
-
-
 
 
   return (
@@ -67,20 +115,8 @@ useEffect(() => {
         className="card intro card-hover card-shine-effect "
         onClick={() => navigate("/about")}
       >
-        <div
-          className="intro-image"
-        // onMouseEnter={playIntroVideo}
-        // onMouseLeave={stopIntroVideo}
-        >
-          {/* <video
-            ref={introVideoRef}
-            src="/assets/intro-vedio.mp4"
-            playsInline
-            preload="metadata"
-            onEnded={(e) => {
-              e.currentTarget.currentTime = 0;
-            }}
-          /> */}
+        {/* <div className="intro-image">
+
           <video
             ref={introVideoRef}
             src="/assets/intro-vedio.mp4"
@@ -95,7 +131,27 @@ useEffect(() => {
               }, 1000);
             }}
           />
+        </div> */}
+        <div className="intro-image">
+          <video
+            ref={introVideoRef}
+            src="/assets/intro-vedio.mp4"
+            autoPlay
+            // muted
+            playsInline
+            preload="auto"
+          />
+
+          {/* <button
+            onClick={toggleMute}
+            className="absolute bottom-6 left-4 z-10 rounded-full bg-black/60 px-4 py-2 text-white"
+          >
+            {isMuted ? "🔇" : "🔊"}
+          </button> */}
         </div>
+
+
+
         <div className="intro-text">
           <p className="eyebrow">UX / UI DESIGNER</p>
           <h2>
