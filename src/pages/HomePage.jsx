@@ -1,28 +1,64 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../components/Image";
 import { Reveal } from "../components/Reveal";
 import { CountUp } from "../components/CountUp";
 
 export default function HomePage() {
-  const navigate = useNavigate()
-  const introVideoRef = useRef(null);
+  // const navigate = useNavigate()
+  // const introVideoRef = useRef(null);
 
-  const playIntroVideo = () => {
-    const video = introVideoRef.current;
-    if (!video) return;
-    video.currentTime = 0;
-    // Some browsers block unmuted playback outside a small set of gestures
-    // (click/keydown) - hover isn't one of them, so this can be rejected.
-    video.play().catch(() => {});
+  // const playIntroVideo = () => {
+  //   const video = introVideoRef.current;
+  //   if (!video) return;
+  //   video.currentTime = 0;
+  //   // Some browsers block unmuted playback outside a small set of gestures
+  //   // (click/keydown) - hover isn't one of them, so this can be rejected.
+  //   video.play().catch(() => { });
+  // };
+
+  // const stopIntroVideo = () => {
+  //   const video = introVideoRef.current;
+  //   if (!video) return;
+  //   video.pause();
+  //   video.currentTime = 0;
+  // };
+
+// jsx
+const navigate = useNavigate();
+
+const introVideoRef = useRef(null);
+
+useEffect(() => {
+  const video = introVideoRef.current;
+
+  if (!video) return;
+
+  // Video ko automatically play karo
+  video.play().catch((error) => {
+    console.log("Video autoplay failed:", error);
+  });
+
+  // Video khatam hone ke baad 1 second wait karke dobara play karo
+  const handleEnded = () => {
+    setTimeout(() => {
+      video.currentTime = 0;
+
+      video.play().catch((error) => {
+        console.log("Video replay failed:", error);
+      });
+    }, 1000);
   };
 
-  const stopIntroVideo = () => {
-    const video = introVideoRef.current;
-    if (!video) return;
-    video.pause();
-    video.currentTime = 0;
+  video.addEventListener("ended", handleEnded);
+
+  return () => {
+    video.removeEventListener("ended", handleEnded);
   };
+}, []);
+
+
+
 
   return (
     <main className="home-grid  ">
@@ -33,16 +69,30 @@ export default function HomePage() {
       >
         <div
           className="intro-image"
-          onMouseEnter={playIntroVideo}
-          onMouseLeave={stopIntroVideo}
+        // onMouseEnter={playIntroVideo}
+        // onMouseLeave={stopIntroVideo}
         >
-          <video
+          {/* <video
             ref={introVideoRef}
             src="/assets/intro-vedio.mp4"
             playsInline
             preload="metadata"
             onEnded={(e) => {
               e.currentTarget.currentTime = 0;
+            }}
+          /> */}
+          <video
+            ref={introVideoRef}
+            src="/assets/intro-vedio.mp4"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onEnded={(e) => {
+              setTimeout(() => {
+                e.currentTarget.currentTime = 0;
+                e.currentTarget.play();
+              }, 1000);
             }}
           />
         </div>
