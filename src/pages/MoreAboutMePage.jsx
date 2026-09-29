@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { ScrollReveal } from "../components/ScrollReveal";
+import Image from "../components/Image";
+import { Reveal } from "../components/Reveal";
 import { FaWhatsapp } from "react-icons/fa6";
 export default function MoreAboutMePage() {
   const navigate = useNavigate()
   return (
     <main className="about-me-page">
-      <ScrollReveal as="aside" className="card about-me-profile">
+      <Reveal as="aside" className="card about-me-profile">
         <div className="about-me-photo-wrap">
-          <img src="/icons/hero-img.png" alt="Wafa Manan" width="320" height="320" decoding="async" />
+          <Image src="/icons/hero-img.png" alt="Wafa Manan" width="320" height="320" priority />
         </div>
         <h1 className="about-me-name">Wafa Manan</h1>
         <p className="about-me-role">@ux.ui Designer</p>
@@ -27,10 +28,10 @@ export default function MoreAboutMePage() {
         onClick={()=>navigate("/contact")}>
           Contact Me
         </button>
-      </ScrollReveal>
+      </Reveal>
 
       <section className="about-me-content">
-        <ScrollReveal as="section" className="about-me-block" delay={0.08}>
+        <Reveal as="section" className="about-me-block" delay={0.08}>
           <h2 className="about-me-block-title">ABOUT ME</h2>
           <p className="about-me-body">
             Hey, I&apos;m Wafa Manan, a passionate designer with 3+ years of experience creating digital experiences and visual content. I
@@ -45,9 +46,9 @@ export default function MoreAboutMePage() {
             <li>AI-Generated Content</li>
           </ul>
           <p className="about-me-body">Tools I use: Figma, Framer, Webflow, Adobe XD, Illustrator, Photoshop, Premiere Pro, Canva, CapCut, WordPress.</p>
-        </ScrollReveal>
+        </Reveal>
 
-        <ScrollReveal as="section" className="about-me-block" delay={0.12}>
+        <Reveal as="section" className="about-me-block" delay={0.14}>
           <h2 className="about-me-block-title">SKILLS</h2>
           <div className="about-me-skills-grid">
             <div className="about-me-skill">
@@ -78,9 +79,9 @@ export default function MoreAboutMePage() {
               <span>90%</span>Premier PRO
             </div>
           </div>
-        </ScrollReveal>
+        </Reveal>
 
-        <ScrollReveal as="section" className="about-me-block" delay={0.16}>
+        <Reveal as="section" className="about-me-block" delay={0.2}>
           <h2 className="about-me-block-title">EXPERIENCE</h2>
           <div className="about-me-timeline-item">
             <p className="about-me-time">August 2024 - Present</p>
@@ -106,9 +107,9 @@ export default function MoreAboutMePage() {
               principles, layout design, and solutions.
             </p>
           </div>
-        </ScrollReveal>
+        </Reveal>
 
-        <ScrollReveal as="section" className="about-me-block" delay={0.2}>
+        <Reveal as="section" className="about-me-block" delay={0.26}>
           <h2 className="about-me-block-title">EDUCATION</h2>
           <div className="about-me-timeline-item">
             <p className="about-me-time">2022 - 2025</p>
@@ -118,7 +119,7 @@ export default function MoreAboutMePage() {
               Developed strong analytical and problem-solving skills, enhancing data-driven decisions and statistics research understanding.
             </p>
           </div>
-        </ScrollReveal>
+        </Reveal>
       </section>
     </main>
   );

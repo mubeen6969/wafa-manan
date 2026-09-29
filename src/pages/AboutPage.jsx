@@ -1,22 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ScrollReveal } from "../components/ScrollReveal";
+import Image from "../components/Image";
+import { Reveal } from "../components/Reveal";
 
 export default function AboutPage() {
    const navigate = useNavigate()
   return (
     <main className="grid-about about-grid">
-      <div as="section" className="card card-hover about-photo">
+      <Reveal as="section" className="card card-hover about-photo">
         <div className="about-photo-frame">
-          <img src="/icons/hero-img.png" alt="Portrait of Wafa Manan" width="400" height="400" decoding="async" />
+          <Image src="/assets/about-section-image.png" alt="Portrait of Wafa Manan" width="400" height="400" priority />
         </div>
-      </div>
-      <div as="section" className="about-bio" delay={0.08}>
-        <div as="header" className="about-summary-head" delay={0.12}>
-          <img className="about-summary-icon" src="/icons/sum-icon.png" alt="" aria-hidden="true" />
+      </Reveal>
+      <Reveal as="section" className="about-bio" delay={0.08}>
+        <Reveal as="header" className="about-summary-head" delay={0.12}>
+          <Image className="about-summary-icon" src="/icons/sum-icon.png" alt="" aria-hidden="true" priority />
           <h2 className="about-summary-title">SELF-SUMMARY</h2>
-          <img className="about-summary-icon" src="/icons/sum-icon.png" alt="" aria-hidden="true" />
-        </div>
-        <div as="section" className="card card-hover uiux " delay={0.16}>
+          <Image className="about-summary-icon" src="/icons/sum-icon.png" alt="" aria-hidden="true" priority />
+        </Reveal>
+        <Reveal as="section" className="card card-hover uiux " delay={0.18}>
           <p className="about-bio-spark" aria-hidden="true">
             ✦
           </p>
@@ -25,9 +26,9 @@ export default function AboutPage() {
             I&apos;m a Senior UI/UX Designer with 3+ years of experience across web design, branding, video editing, and motion-with a focus on
             usability, prototyping, typography, grids, pacing, and polished delivery from concept through hand-off.
           </p>
-        </div>
-      </div>
-      <div as="section" className="card card-hover about-exp" delay={0.12}>
+        </Reveal>
+      </Reveal>
+      <Reveal as="section" className="card card-hover about-exp" delay={0.14}>
         <h3 className="about-col-title">EXPERIENCE</h3>
         <ul className="about-list">
           <li>
@@ -46,8 +47,8 @@ export default function AboutPage() {
             <span className="about-list-soft">Junior UX / UI Designer</span>
           </li>
         </ul>
-      </div>
-      <div as="section" className="card card-hover about-edu" delay={0.16}>
+      </Reveal>
+      <Reveal as="section" className="card card-hover about-edu" delay={0.2}>
         <h3 className="about-col-title">EDUCATION</h3>
         <ul className="about-list">
           <li>
@@ -66,8 +67,8 @@ export default function AboutPage() {
             <span className="about-list-soft">University of Faisalabad</span>
           </li>
         </ul>
-      </div>
-      <div as="section" className="card square profiles card-hover" delay={0.2}
+      </Reveal>
+      <Reveal as="section" className="card square profiles card-hover" delay={0.26}
        onClick={() => navigate("/contact")}>
         <div className="social-icons">
           <a href="https://www.behance.net/wafa29" target="_blank" rel="noopener noreferrer" className="social-dot" aria-label="Behance">
@@ -84,32 +85,29 @@ export default function AboutPage() {
           </div>
           <Link to="/contact">
             <button type="button" className="circle-arrow" aria-label="Open profiles">
-              <img src="/icons/icon.svg" width="46" height="42" alt="" decoding="async" />
+              <Image src="/icons/icon.svg" width="46" height="42" alt="" />
             </button>
           </Link>
 
         </div>
-      </div>
-      <div as="section" className="card card-hover about-cta cta" delay={0.24}
+      </Reveal>
+      <Reveal as="section" className="card card-hover about-cta cta" delay={0.32}
        onClick={() => navigate("/contact")}>
         <p className="spark">✦</p>
+        <Link to="/contact">
         <h2 className="about-cta-headline">
           Let&apos;s&nbsp;<br />
           work&nbsp;<span>together.</span>
         </h2>
-        <Link to="/contact">
           <button type="button" className="circle-arrow" aria-label="Start a project">
-            <img src="/icons/icon.svg" width="46" height="42" alt="" decoding="async" />
+            <Image src="/icons/icon.svg" width="46" height="42" alt="" />
           </button>
         </Link>
-      </div>
-      <div as="section" className="card small credentials card-hover" delay={0.28}
+      </Reveal>
+      <Reveal as="section" className="card small credentials card-hover" delay={0.38}
       onClick={()=>navigate("/more-about-me")}>
-        {/* <div className="signature">
-          <img src="/icons/Group 18.png" alt="" style={{ height: "150px", width: "180px" }} />
-        </div> */}
          <div className="signature">
-              <img src="/icons/New-folder/my-logo.png " alt="" style={{ height: "110px", width: "180px" }} />
+              <Image src="/icons/New-folder/my-logo.png " alt="" style={{ height: "110px", width: "180px" }} />
             </div>
         <div className="services-content card-text-band">
           <div>
@@ -118,11 +116,11 @@ export default function AboutPage() {
           </div>
           <Link to="/more-about-me">
             <button type="button" className="circle-arrow" aria-label="Credentials">
-              <img src="/icons/icon.svg" width="46" height="42" alt="" decoding="async" />
+              <Image src="/icons/icon.svg" width="46" height="42" alt="" />
             </button>
           </Link>
         </div>
-      </div>
+      </Reveal>
     </main>
   );
 }

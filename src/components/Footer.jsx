@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Reveal } from "./Reveal";
 
 const TIGHT_PATHS = new Set(["/services", "/contact", "/works"]);
 
@@ -7,14 +7,15 @@ export default function Footer() {
   const location = useLocation();
   const navigate = useNavigate()
   return (
-    <motion.footer
+    <Reveal
+      as="footer"
       className={`footer ${TIGHT_PATHS.has(location.pathname) ? "footer-tight" : ""}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      delay={0.3}
+      y={20}
     >
-      <h2 className="logo">WAFA MANAN.</h2>
+      <Link to="/" className="footer-logo" aria-label="Wafa Manan home">
+        WAFA MANAN.
+      </Link>
       <div className="footer-nav">
         <Link to="/">HOME</Link>
         <Link to="/about">ABOUT</Link>
@@ -23,8 +24,12 @@ export default function Footer() {
       </div>
       <p>
         &copy; All rights reserved by <span
-        onClick={()=>navigate("/admin")}>MW.</span>
+        >MW.</span>
       </p>
-    </motion.footer>
+      {/* <p>
+        &copy; All rights reserved by <span
+        onClick={()=>navigate("/admin")}>MW.</span>
+      </p> */}
+    </Reveal>
   );
 }
