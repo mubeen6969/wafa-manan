@@ -49,8 +49,8 @@ export default function HomePage() {
         <div className="intro-text">
           <p className="eyebrow">UX / UI DESIGNER</p>
           <h2>
-            WAFA <br />
-            MANAN.
+            LOVE <br />
+            YOU.
           </h2>
           <p>
             I&apos;m a Senior UI/UX <br /> Designer with 3 years of <br /> expertise.
