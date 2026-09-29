@@ -66,6 +66,7 @@ export default function HomePage() {
             ref={introVideoRef}
             src="/assets/intro-vedio.mp4"
             autoPlay
+            muted
             playsInline
             preload="auto"
           />
