@@ -1713,7 +1713,7 @@ body.site-loading {
 }
 
 .work-thumb-restricted {
-    filter: blur(3px);
+    filter: blur(8px);
     transform: scale(1.05);
 }
 

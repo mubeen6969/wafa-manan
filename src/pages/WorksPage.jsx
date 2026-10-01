@@ -10,6 +10,7 @@ const API_URL = "https://wafa-manan-back-end.onrender.com/api/projects";
 const CACHE_KEY = "wafa-projects-cache";
 const SLOW_LOAD_MS = 4000;
 const SKELETON_COUNT = 6;
+const PAGE_SIZE = 9;
 
 const mediaType = (src) => {
   if (!src) return "image";
@@ -32,12 +33,51 @@ const categoryLabel = (category) => {
 
 function readCachedProjects() {
   try {
-    const raw = sessionStorage.getItem(CACHE_KEY);
+    // localStorage (not sessionStorage) so returning visitors get an instant
+    // render from cache across tabs/sessions while a fresh fetch runs behind it.
+    const raw = localStorage.getItem(CACHE_KEY);
     const parsed = raw ? JSON.parse(raw) : null;
     return Array.isArray(parsed) ? parsed : null;
   } catch {
     return null;
   }
+}
+
+// <video> has no reliable native `loading="lazy"` support, so video thumbs
+// only get a `src` once they're about to enter the viewport - otherwise every
+// thumb on the page would start fetching its first frame at once.
+function LazyVideoThumb({ className, src }) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      className={className}
+      src={inView ? src : undefined}
+      muted
+      playsInline
+      preload="none"
+    />
+  );
 }
 
 function WorkCardSkeleton() {
@@ -57,6 +97,7 @@ function WorkCardSkeleton() {
 
 export default function WorksPage() {
   const [filter, setFilter] = useState("all");
+  const [page, setPage] = useState(1);
   const [projects, setProjects] = useState(() => readCachedProjects());
   const [status, setStatus] = useState(() => (readCachedProjects() ? "ready" : "loading"));
   const [isSlowLoad, setIsSlowLoad] = useState(false);
@@ -86,7 +127,7 @@ export default function WorksPage() {
           const safeList = list.map((p) =>
             p.restricted ? { ...p, media: undefined, gallery: undefined } : p
           );
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify(safeList));
+          localStorage.setItem(CACHE_KEY, JSON.stringify(safeList));
         } catch {
           // sessionStorage unavailable (private mode, quota, etc.) - fine to skip caching.
         }
@@ -112,6 +153,18 @@ export default function WorksPage() {
   const filteredProjects =
     filter === "all" ? projects ?? [] : (projects ?? []).filter((project) => project.category === filter);
 
+  const pageCount = Math.max(1, Math.ceil(filteredProjects.length / PAGE_SIZE));
+  const currentPage = Math.min(page, pageCount);
+  const pagedProjects = filteredProjects.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
+
+  const goToPage = (nextPage) => {
+    setPage(nextPage);
+    document.getElementById("works-list")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const openProjectMedia = (project) => {
     const hasGallery = Array.isArray(project.gallery) && project.gallery.length > 0;
     const base = `title=${encodeURIComponent(project.title)}&category=${encodeURIComponent(project.category)}`;
@@ -124,15 +177,33 @@ export default function WorksPage() {
         ? hasGallery
           ? `/project-viewer?${base}&type=gallery&gallery=${encodeURIComponent(JSON.stringify(project.gallery))}`
           : `/project-viewer?${base}&type=${encodeURIComponent(mediaType(project.media))}&src=${encodeURIComponent(
-              encodeURI(project.media)
-            )}`
+            encodeURI(project.media)
+          )}`
         : `/project-viewer?${base}&type=gallery&gallery=${encodeURIComponent("[]")}`;
 
     window.open(url, "_blank", "noopener");
   };
 
+  // const openProject = (project) => {
+  //   if (project.restricted) {
+  //     setNdaTarget(project);
+  //     return;
+  //   }
+
+  //   openProjectMedia(project);
+  // };
+
   const openProject = (project) => {
     if (project.restricted) {
+      const token = getNdaToken();
+
+      // NDA already unlocked
+      if (token) {
+        openProjectMedia(project);
+        return;
+      }
+
+      // NDA not unlocked yet
       setNdaTarget(project);
       return;
     }
@@ -140,16 +211,36 @@ export default function WorksPage() {
     openProjectMedia(project);
   };
 
+
+  // const handleUnlocked = () => {
+  //   const target = ndaTarget;
+  //   setNdaTarget(null);
+  //   // Refetch with the new token so unlocked media comes back, then open the
+  //   // project the user actually unlocked instead of leaving them back at the grid.
+  //   loadProjects().then((list) => {
+  //     const unlocked = list?.find(
+  //       (project) => project.title === target?.title && project.category === target?.category
+  //     );
+  //     openProjectMedia(unlocked && !unlocked.restricted ? unlocked : target);
+  //   });
+  // };
+
+
   const handleUnlocked = () => {
     const target = ndaTarget;
+
     setNdaTarget(null);
-    // Refetch with the new token so unlocked media comes back, then open the
-    // project the user actually unlocked instead of leaving them back at the grid.
+
     loadProjects().then((list) => {
       const unlocked = list?.find(
-        (project) => project.title === target?.title && project.category === target?.category
+        (project) =>
+          project.title === target?.title &&
+          project.category === target?.category
       );
-      openProjectMedia(unlocked && !unlocked.restricted ? unlocked : target);
+
+      openProjectMedia(
+        unlocked && !unlocked.restricted ? unlocked : target
+      );
     });
   };
 
@@ -175,7 +266,10 @@ export default function WorksPage() {
             key={value}
             className={`filter-btn ${filter === value ? "is-active" : ""}`}
             type="button"
-            onClick={() => setFilter(value)}
+            onClick={() => {
+              setFilter(value);
+              setPage(1);
+            }}
           >
             {label}
           </button>
@@ -222,8 +316,8 @@ export default function WorksPage() {
       )}
 
       {status === "ready" && filteredProjects.length > 0 && (
-        <section key={filter} id="works-list" aria-live="polite" className="works-list">
-          {filteredProjects.map((project, index) => {
+        <section key={`${filter}-${currentPage}`} id="works-list" aria-live="polite" className="works-list">
+          {pagedProjects.map((project, index) => {
             const type = mediaType(project.media);
             const thumb = encodeURI(project.thumb);
 
@@ -237,12 +331,9 @@ export default function WorksPage() {
                 onClick={() => openProject(project)}
               >
                 {type === "video" ? (
-                  <video
+                  <LazyVideoThumb
                     className={`work-thumb work-thumb-video ${project.restricted ? "work-thumb-restricted" : ""}`}
                     src={thumb}
-                    muted
-                    playsInline
-                    preload="none"
                   />
                 ) : (
                   <Image
@@ -286,6 +377,42 @@ export default function WorksPage() {
             );
           })}
         </section>
+      )}
+
+      {status === "ready" && filteredProjects.length > PAGE_SIZE && (
+        <nav className="works-pagination" aria-label="Projects pagination">
+          <button
+            type="button"
+            className="filter-btn"
+            disabled={currentPage === 1}
+            onClick={() => goToPage(currentPage - 1)}
+          >
+            Prev
+          </button>
+
+          {Array.from({ length: pageCount }).map((_, index) => {
+            const pageNumber = index + 1;
+            return (
+              <button
+                key={pageNumber}
+                type="button"
+                className={`filter-btn ${pageNumber === currentPage ? "is-active" : ""}`}
+                onClick={() => goToPage(pageNumber)}
+              >
+                {pageNumber}
+              </button>
+            );
+          })}
+
+          <button
+            type="button"
+            className="filter-btn"
+            disabled={currentPage === pageCount}
+            onClick={() => goToPage(currentPage + 1)}
+          >
+            Next
+          </button>
+        </nav>
       )}
 
       {ndaTarget && <NdaUnlockModal onClose={() => setNdaTarget(null)} onUnlocked={handleUnlocked} />}
