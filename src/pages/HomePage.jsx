@@ -1,61 +1,67 @@
-import { useRef, useEffect, useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../components/Image";
 import { Reveal } from "../components/Reveal";
 import { CountUp } from "../components/CountUp";
 
 export default function HomePage() {
-
-
-
-  const navigate = useNavigate();
-
+  const navigate = useNavigate()
   const introVideoRef = useRef(null);
-  const [isMuted, setIsMuted] = useState(true);
+
+  const userPausedRef = useRef(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const video = introVideoRef.current;
-
     if (!video) return;
 
-    // Website open hote hi muted video play
-    video.muted = true;
+    let timeoutId;
 
-    video.play().catch((error) => {
-      console.log("Video autoplay failed:", error);
-    });
-
-    // Video khatam hone ke 1 second baad replay
-    const handleEnded = () => {
-      setTimeout(() => {
-        video.currentTime = 0;
-
-        video.play().catch((error) => {
-          console.log("Video replay failed:", error);
-        });
-      }, 1000);
+    const playIntroVideo = () => {
+      if (userPausedRef.current) return;
+      video.currentTime = 0;
+      video.play().catch(() => {});
     };
 
-    video.addEventListener("ended", handleEnded);
-
-    return () => {
-      video.removeEventListener("ended", handleEnded);
+    const scheduleNextPlay = () => {
+      const delay = 15000 + Math.random() * 15000; // 15-30s
+      timeoutId = setTimeout(() => {
+        playIntroVideo();
+        scheduleNextPlay();
+      }, delay);
     };
+
+    playIntroVideo();
+    scheduleNextPlay();
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
-  const toggleMute = () => {
+  const toggleMute = (e) => {
+    e.stopPropagation();
     const video = introVideoRef.current;
-
     if (!video) return;
-
     video.muted = !video.muted;
     setIsMuted(video.muted);
-
-    // Agar sound on kiya hai aur video paused hai to play karo
-    if (!video.paused) return;
-
-    video.play().catch(() => { });
   };
+
+  const togglePlayPause = (e) => {
+    e.stopPropagation();
+    const video = introVideoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      userPausedRef.current = false;
+      video.play().catch(() => {});
+      setIsPaused(false);
+    } else {
+      userPausedRef.current = true;
+      video.pause();
+      setIsPaused(true);
+    }
+  };
+
   return (
     <main className="home-grid  ">
       <Reveal
@@ -68,23 +74,31 @@ export default function HomePage() {
           <video
             ref={introVideoRef}
             src="/assets/intro-vedio.mp4"
-            autoPlay
-            muted
             playsInline
+
             preload="auto"
+            onEnded={(e) => {
+              e.currentTarget.currentTime = 0;
+            }}
           />
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleMute();
-            }}
-            className="absolute bottom-4 left-4 z-10 rounded-full bg-black/60 px-4 py-2 text-white"
-          >
-            {isMuted ? "🔇" : "🔊"}
-          </button>
+          <div className="intro-video-controls">
+            <button
+              type="button"
+              onClick={togglePlayPause}
+              aria-label={isPaused ? "Play video" : "Pause video"}
+            >
+              {isPaused ? "▶" : "❚❚"}
+            </button>
+            <button
+              type="button"
+              onClick={toggleMute}
+              aria-label={isMuted ? "Unmute video" : "Mute video"}
+            >
+              {isMuted ? "🔇" : "🔊"}
+            </button>
+          </div>
         </div>
-
         <div className="intro-text">
           <p className="eyebrow">UX / UI DESIGNER</p>
           <h2>
@@ -92,7 +106,7 @@ export default function HomePage() {
             MANAN.
           </h2>
           <p>
-            I&apos;m a Senior UI/UX <br /> Designer with 3 years of <br /> expertise.
+            I&apos;m a Senior UI/UX <br /> Designer with 3+ years of <br /> expertise.
           </p>
         </div>
         <button type="button" className="circle-arrow intro-btn" aria-label="Read more">
