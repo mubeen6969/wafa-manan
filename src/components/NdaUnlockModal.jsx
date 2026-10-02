@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Lock, Loader2 } from "lucide-react";
 import { setNdaToken } from "../utils/ndaAccess";
 
-const API_URL = "http://localhost:5000/api/nda/unlock";
+// const API_URL = "http://localhost:5000/api/nda/unlock";
+const API_URL =
+  "https://wafa-manan-back-end.onrender.com/api/nda/unlock";
 
 export default function NdaUnlockModal({ onClose, onUnlocked }) {
   const [password, setPassword] = useState("");
