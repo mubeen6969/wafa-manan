@@ -11,9 +11,23 @@ import ServicesPage from "./pages/ServicesPage";
 import WorksPage from "./pages/WorksPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogin from "./pages/AdminLogin";
+import { useEffect } from "react";
 
 export default function App() {
   usePageMeta();
+
+   useEffect(() => {
+    const disableRightClick = (e) => {
+      e.preventDefault();
+    };
+
+    document.addEventListener("contextmenu", disableRightClick);
+
+    return () => {
+      document.removeEventListener("contextmenu", disableRightClick);
+    };
+  }, []);
+
 
   return (
     <>

@@ -3327,3 +3327,13 @@ body.site-loading {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+
+
+.works-pagination{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

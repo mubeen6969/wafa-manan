@@ -10,7 +10,7 @@ const API_URL = "https://wafa-manan-back-end.onrender.com/api/projects";
 const CACHE_KEY = "wafa-projects-cache";
 const SLOW_LOAD_MS = 4000;
 const SKELETON_COUNT = 6;
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 15;
 
 const mediaType = (src) => {
   if (!src) return "image";
@@ -212,18 +212,7 @@ export default function WorksPage() {
   };
 
 
-  // const handleUnlocked = () => {
-  //   const target = ndaTarget;
-  //   setNdaTarget(null);
-  //   // Refetch with the new token so unlocked media comes back, then open the
-  //   // project the user actually unlocked instead of leaving them back at the grid.
-  //   loadProjects().then((list) => {
-  //     const unlocked = list?.find(
-  //       (project) => project.title === target?.title && project.category === target?.category
-  //     );
-  //     openProjectMedia(unlocked && !unlocked.restricted ? unlocked : target);
-  //   });
-  // };
+
 
 
   const handleUnlocked = () => {
